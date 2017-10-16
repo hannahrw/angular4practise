@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { PeopleService } from './people.service'
 
 @Component({
@@ -7,17 +8,19 @@ import { PeopleService } from './people.service'
   styleUrls: ['./people.component.css']
 })
 export class PeopleComponent implements OnInit {
+  readonly form: FormGroup;
   people: object;
 
-  constructor(private peopleService: PeopleService) { }
-
-  ngOnInit() {
-    this.getPeople();
+  constructor(formBuilder: FormBuilder, private peopleService: PeopleService) { 
+    this.form = formBuilder.group({
+     text: ''
+   });
   }
 
-  getPeople() {
-    debugger;
-    this.peopleService.search('yoda')
+  ngOnInit() { }
+
+  search() {
+    this.peopleService.search(this.form.value.text)
       .subscribe(people => this.people = people);
   };
 }

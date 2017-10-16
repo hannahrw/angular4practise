@@ -1,4 +1,9 @@
 <ng-container>
+  <form [formGroup]="form" (submit)="search()">
+    <input formControlName="text" />
+    <button>Search</button>
+  </form>
+
   <div *ngFor="let person of people">
     {{person.name}}
   </div>
