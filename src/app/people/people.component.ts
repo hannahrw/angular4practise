@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PeopleService } from './people.service'
+import { Observable } from 'rxjs';
+
+import { Person } from './person/person';
 
 @Component({
   selector: 'app-people',
@@ -9,7 +12,7 @@ import { PeopleService } from './people.service'
 })
 export class PeopleComponent implements OnInit {
   readonly form: FormGroup;
-  people: object;
+  people: ReadonlyArray<Person>;
 
   constructor(formBuilder: FormBuilder, private peopleService: PeopleService) { 
     this.form = formBuilder.group({
